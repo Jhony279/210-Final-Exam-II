@@ -32,7 +32,7 @@ public:
 
     void dequeue() {
         if(!front) {
-            cout << "Queue is empty!" << endl << endl;
+            cout << "   Queue is empty!" << endl;
             return;
         }
 
@@ -49,7 +49,7 @@ public:
     void display() {
         Customer* temp = front;
         while(temp) {
-            cout << "Customer: " << temp->name << ", Order: " << temp->order << endl;
+            cout << "\n   Customer: " << temp->name << ", Order: " << temp->order;
             temp = temp->next;
         }
         cout << endl;
@@ -77,7 +77,7 @@ int main() {
     for (int i = 0; i < 3; i++){
         line.enqueue(names[rand() % ARRAY_SIZE], drinks[rand() % ARRAY_SIZE]);
     }
-    cout << "Initial Queue:" << endl;
+    cout << "\nInitial Queue:";
     line.display();
     
     for (int round = 0; round <= 10; round++){
@@ -86,7 +86,8 @@ int main() {
         if (rand() % 2 == 0) {
             line.enqueue(names[rand() % ARRAY_SIZE], drinks[rand() % ARRAY_SIZE]);
         }
-        cout << "Round " << round + 1 << ":" << endl;
+
+        cout << "\nRound " << round + 1 << ":";
         line.display();
     }
 

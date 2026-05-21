@@ -90,7 +90,7 @@ int main() {
 
     CoffeQueue line;
     deque<MuffinOrder> muffinOrders;
-    deque<BracaletOrder> bracaletOrders;
+    vector<BracaletOrder> bracaletOrders;
 
     for (int i = 0; i < 3; i++){
         line.enqueue(names[rand() % ARRAY_SIZE], drinks[rand() % ARRAY_SIZE]);
@@ -125,19 +125,25 @@ int main() {
         }
 
         if (!bracaletOrders.empty()) {
-            bracaletOrders.pop_front();
+            bracaletOrders.erase(bracaletOrders.begin());
         }
 
         if (rand() % 2 == 0) {
             line.enqueue(names[rand() % ARRAY_SIZE], drinks[rand() % ARRAY_SIZE]);
         }
-
+        
         if (rand() % 2 == 0) {
-            MuffinOrder order = {names[rand() % ARRAY_SIZE], 
-                                    "Muffin " + to_string(rand() % 5 + 1)};
-            muffinOrders.push_back(order);
+            MuffinOrder m_Order = {names[rand() % ARRAY_SIZE], 
+                "Muffin " + to_string(rand() % 5 + 1)};
+            muffinOrders.push_back(m_Order);
         }
-
+            
+        if (rand() % 2 == 0) {
+            BracaletOrder b_Order = {names[rand() % ARRAY_SIZE], 
+                                    colors[rand() % ARRAY_SIZE]};
+            bracaletOrders.push_back(b_Order);
+        }
+            
         cout << "\nRound " << round + 1 << ":";
         line.display();
 
@@ -147,6 +153,15 @@ int main() {
             for (const auto& customer : muffinOrders) {
                 cout << "\n   Muffin Customer: " << customer.name << ", Order: " 
                         << customer.muffin;
+            }
+            cout << endl;
+        }
+
+        if (bracaletOrders.empty()) {
+            cout << "   Bracalet queue is empty!" << endl;
+        } else {
+            for (const auto& customer : bracaletOrders) {
+                cout << "\n   Bracalet Customer: " << customer.name << ", Color: " << customer.bracalet;
             }
             cout << endl;
         }

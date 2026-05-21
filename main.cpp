@@ -96,7 +96,10 @@ int main() {
     
     for (int round = 0; round <= 10; round++){
         line.dequeue();
-        muffinOrders.pop_front();
+
+        if (!muffinOrders.empty()) {
+            muffinOrders.pop_front();
+        }
 
         if (rand() % 2 == 0) {
             line.enqueue(names[rand() % ARRAY_SIZE], drinks[rand() % ARRAY_SIZE]);
@@ -110,12 +113,13 @@ int main() {
         cout << "\nRound " << round + 1 << ":";
         line.display();
 
-        if (!muffinOrders.empty()) {
-            for (const auto& order : muffinOrders) {
-                cout << "\n   Muffin Customer: " << order.name << ", Muffin: " << order.muffin;
-            }
+        if (muffinOrders.empty()) {
+            cout << "   Muffin queue is empty!" << endl;
         } else {
-            cout << "   Muffin queue empty!";
+            for (const auto& customer : muffinOrders) {
+                cout << "\n   Muffin Customer: " << customer.name << ", Order: " << customer.muffin;
+            }
+            cout << endl;
         }
     }
 

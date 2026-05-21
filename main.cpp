@@ -2,16 +2,17 @@
 #include <iostream>
 using namespace std;
 
-struct Customer {
-    string name;
-    string order;
-    Customer* next;
-
-    Customer(string n, string o) : name(n), order(o), next(nullptr) {}
-};
 
 class CoffeQueue {
 private:
+    struct Customer {
+        string name;
+        string order;
+        Customer* next;
+
+        Customer(string n, string o) : name(n), order(o), next(nullptr) {}
+    };
+
     Customer* front;
     Customer* rear;
 
@@ -63,6 +64,7 @@ public:
 };
 
 int main() {
+    srand(time(0));
 
     const int ARRAY_SIZE = 10;
     string names[ARRAY_SIZE] = {"Alice", "Bob", "Charlie", "Diana", "Ethan", 

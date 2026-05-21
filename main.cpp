@@ -32,7 +32,7 @@ public:
 
     void dequeue() {
         if(!front) {
-            cout << "   Queue is empty!" << endl;
+            cout << "   Coffee Queue is empty!" << endl;
             return;
         }
 
@@ -49,7 +49,7 @@ public:
     void display() {
         Customer* temp = front;
         while(temp) {
-            cout << "\n   Customer: " << temp->name << ", Order: " << temp->order;
+            cout << "\n   Coffee Customer: " << temp->name << ", Order: " << temp->order;
             temp = temp->next;
         }
         cout << endl;
@@ -89,16 +89,34 @@ int main() {
     }
     cout << "\nInitial Queue:";
     line.display();
+
+    for (const auto& order : muffinOrders) {
+        cout << "\n   Muffin Customer: " << order.name << ", Muffin: " << order.muffin;
+    }
     
     for (int round = 0; round <= 10; round++){
         line.dequeue();
+        muffinOrders.pop_front();
 
         if (rand() % 2 == 0) {
             line.enqueue(names[rand() % ARRAY_SIZE], drinks[rand() % ARRAY_SIZE]);
         }
 
+        if (rand() % 2 == 0) {
+            MuffinOrder order = {names[rand() % ARRAY_SIZE], "Muffin " + to_string(rand() % 5 + 1)};
+            muffinOrders.push_back(order);
+        }
+
         cout << "\nRound " << round + 1 << ":";
         line.display();
+
+        if (!muffinOrders.empty()) {
+            for (const auto& order : muffinOrders) {
+                cout << "\n   Muffin Customer: " << order.name << ", Muffin: " << order.muffin;
+            }
+        } else {
+            cout << "   Muffin queue empty!";
+        }
     }
 
     return 0;

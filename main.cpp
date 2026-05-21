@@ -32,7 +32,7 @@ public:
 
     void dequeue() {
         if(!front) {
-            cout << "Queue is empty!" << endl;
+            cout << "Queue is empty!" << endl << endl;
             return;
         }
 
@@ -52,6 +52,7 @@ public:
             cout << "Customer: " << temp->name << ", Order: " << temp->order << endl;
             temp = temp->next;
         }
+        cout << endl;
     }
 
     ~CoffeQueue() {
@@ -71,15 +72,23 @@ int main() {
                                 "Fiona", "George", "Hannah", "Ian", "Julia"};
     string drinks[ARRAY_SIZE] = {"Latte", "Espresso", "Cappuccino", "Americano", "Mocha", 
                                 "Macchiato", "Cold Brew", "Matcha", "Chai Tea", "Frappuccino"};
-    return 0;
 
     CoffeQueue line;
     for (int i = 0; i < 3; i++){
         line.enqueue(names[rand() % ARRAY_SIZE], drinks[rand() % ARRAY_SIZE]);
     }
+    cout << "Initial Queue:" << endl;
+    line.display();
     
     for (int round = 0; round <= 10; round++){
         line.dequeue();
 
+        if (rand() % 2 == 0) {
+            line.enqueue(names[rand() % ARRAY_SIZE], drinks[rand() % ARRAY_SIZE]);
+        }
+        cout << "Round " << round + 1 << ":" << endl;
+        line.display();
     }
+
+    return 0;
 }

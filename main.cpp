@@ -1,7 +1,7 @@
 // COMSC-210 | Final 2 | Johnathan Perez Baltazar
 #include <iostream>
+#include <deque>
 using namespace std;
-
 
 class CoffeQueue {
 private:
@@ -64,6 +64,11 @@ public:
     }
 };
 
+struct MuffinOrder {
+    string name;
+    string muffin;
+};
+
 int main() {
     srand(time(0));
 
@@ -74,8 +79,13 @@ int main() {
                                 "Macchiato", "Cold Brew", "Matcha", "Chai Tea", "Frappuccino"};
 
     CoffeQueue line;
+    deque<MuffinOrder> muffinOrders;
+
     for (int i = 0; i < 3; i++){
         line.enqueue(names[rand() % ARRAY_SIZE], drinks[rand() % ARRAY_SIZE]);
+
+        MuffinOrder order = {names[rand() % ARRAY_SIZE], "Muffin " + to_string(rand() % 5 + 1)};
+        muffinOrders.push_back(order);
     }
     cout << "\nInitial Queue:";
     line.display();

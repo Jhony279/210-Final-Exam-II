@@ -1,6 +1,7 @@
 // COMSC-210 | Final 2 | Johnathan Perez Baltazar
 #include <iostream>
 #include <deque>
+#include <vector>
 using namespace std;
 
 class CoffeQueue {
@@ -49,7 +50,8 @@ public:
     void display() {
         Customer* temp = front;
         while(temp) {
-            cout << "\n   Coffee Customer: " << temp->name << ", Order: " << temp->order;
+            cout << "\n   Coffee Customer: " << temp->name << ", Order: " 
+                    << temp->order;
             temp = temp->next;
         }
         cout << endl;
@@ -69,31 +71,52 @@ struct MuffinOrder {
     string muffin;
 };
 
+struct BracaletOrder {
+    string name;
+    string bracalet;
+};
+
 int main() {
     srand(time(0));
 
     const int ARRAY_SIZE = 10;
     string names[ARRAY_SIZE] = {"Alice", "Bob", "Charlie", "Diana", "Ethan", 
                                 "Fiona", "George", "Hannah", "Ian", "Julia"};
-    string drinks[ARRAY_SIZE] = {"Latte", "Espresso", "Cappuccino", "Americano", "Mocha", 
-                                "Macchiato", "Cold Brew", "Matcha", "Chai Tea", "Frappuccino"};
+    string drinks[ARRAY_SIZE] = {"Latte", "Espresso", "Cappuccino", "Americano", 
+                                "Mocha", "Macchiato", "Cold Brew", "Matcha", 
+                                "Chai Tea", "Frappuccino"};
+    string colors[ARRAY_SIZE] = {"Red", "Blue", "Green", "Yellow", "Purple", 
+                                "Pink", "Orange", "Black", "White", "Rainbow"};
 
     CoffeQueue line;
     deque<MuffinOrder> muffinOrders;
+    deque<BracaletOrder> bracaletOrders;
 
     for (int i = 0; i < 3; i++){
         line.enqueue(names[rand() % ARRAY_SIZE], drinks[rand() % ARRAY_SIZE]);
 
-        MuffinOrder order = {names[rand() % ARRAY_SIZE], "Muffin " + to_string(rand() % 5 + 1)};
+        MuffinOrder order = {names[rand() % ARRAY_SIZE], 
+                                "Muffin " + to_string(rand() % 5 + 1)};
         muffinOrders.push_back(order);
+        
+        BracaletOrder bOrder = {names[rand() % ARRAY_SIZE], 
+                                colors[rand() % ARRAY_SIZE]};
+        bracaletOrders.push_back(bOrder);
     }
+
     cout << "\nInitial Queue:";
     line.display();
 
     for (const auto& order : muffinOrders) {
-        cout << "\n   Muffin Customer: " << order.name << ", Muffin: " << order.muffin;
+        cout << "\n   Muffin Customer: " << order.name << ", Muffin: " 
+                << order.muffin;
     }
-    
+
+    for (const auto& order : bracaletOrders) {
+        cout << "\n   Bracalet Customer: " << order.name << ", Bracalet: " 
+                << order.bracalet;
+    }
+
     for (int round = 0; round <= 10; round++){
         line.dequeue();
 
@@ -101,12 +124,17 @@ int main() {
             muffinOrders.pop_front();
         }
 
+        if (!bracaletOrders.empty()) {
+            bracaletOrders.pop_front();
+        }
+
         if (rand() % 2 == 0) {
             line.enqueue(names[rand() % ARRAY_SIZE], drinks[rand() % ARRAY_SIZE]);
         }
 
         if (rand() % 2 == 0) {
-            MuffinOrder order = {names[rand() % ARRAY_SIZE], "Muffin " + to_string(rand() % 5 + 1)};
+            MuffinOrder order = {names[rand() % ARRAY_SIZE], 
+                                    "Muffin " + to_string(rand() % 5 + 1)};
             muffinOrders.push_back(order);
         }
 
@@ -117,7 +145,8 @@ int main() {
             cout << "   Muffin queue is empty!" << endl;
         } else {
             for (const auto& customer : muffinOrders) {
-                cout << "\n   Muffin Customer: " << customer.name << ", Order: " << customer.muffin;
+                cout << "\n   Muffin Customer: " << customer.name << ", Order: " 
+                        << customer.muffin;
             }
             cout << endl;
         }

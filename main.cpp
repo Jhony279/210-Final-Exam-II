@@ -73,9 +73,13 @@ int main() {
                                 "Macchiato", "Cold Brew", "Matcha", "Chai Tea", "Frappuccino"};
     return 0;
 
-    CoffeQueue queue;
+    CoffeQueue line;
     for (int i = 0; i < 3; i++){
-        queue.enqueue(names[rand() % ARRAY_SIZE], drinks[rand() % ARRAY_SIZE]);
+        line.enqueue(names[rand() % ARRAY_SIZE], drinks[rand() % ARRAY_SIZE]);
     }
-    queue.display();
+    
+    for (int round = 0; round <= 10; round++){
+        line.dequeue();
+
+    }
 }

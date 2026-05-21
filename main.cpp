@@ -2,6 +2,7 @@
 #include <iostream>
 #include <deque>
 #include <vector>
+#include <list>
 using namespace std;
 
 class CoffeQueue {
@@ -76,6 +77,11 @@ struct BracaletOrder {
     string bracalet;
 };
 
+struct IceCreamOrder {
+    string name;
+    string flavor;
+};
+
 int main() {
     srand(time(0));
 
@@ -87,10 +93,14 @@ int main() {
                                 "Chai Tea", "Frappuccino"};
     string colors[ARRAY_SIZE] = {"Red", "Blue", "Green", "Yellow", "Purple", 
                                 "Pink", "Orange", "Black", "White", "Rainbow"};
+    string flavors[ARRAY_SIZE] = {"Vanilla", "Chocolate", "Strawberry", "Mint", 
+                                "Cookie Dough", "Rocky Road", "Pistachio", "Coffee",
+                                "Mango", "Butter Pecan"};
 
     CoffeQueue line;
     deque<MuffinOrder> muffinOrders;
     vector<BracaletOrder> bracaletOrders;
+    list<IceCreamOrder> iceCreamOrders;
 
     for (int i = 0; i < 3; i++){
         line.enqueue(names[rand() % ARRAY_SIZE], drinks[rand() % ARRAY_SIZE]);
@@ -102,6 +112,10 @@ int main() {
         BracaletOrder bOrder = {names[rand() % ARRAY_SIZE], 
                                 colors[rand() % ARRAY_SIZE]};
         bracaletOrders.push_back(bOrder);
+
+        IceCreamOrder iOrder = {names[rand() % ARRAY_SIZE], 
+                                flavors[rand() % ARRAY_SIZE]};
+        iceCreamOrders.push_back(iOrder);
     }
 
     cout << "\nInitial Queue:";
@@ -117,6 +131,11 @@ int main() {
                 << order.bracalet;
     }
 
+    for (const auto& order : iceCreamOrders) {
+        cout << "\n   Ice Cream Customer: " << order.name << ", Flavor: " 
+                << order.flavor;
+    }
+
     for (int round = 0; round <= 10; round++){
         line.dequeue();
 
@@ -126,6 +145,10 @@ int main() {
 
         if (!bracaletOrders.empty()) {
             bracaletOrders.erase(bracaletOrders.begin());
+        }
+
+        if (!iceCreamOrders.empty()) {
+            iceCreamOrders.pop_front();
         }
 
         if (rand() % 2 == 0) {
@@ -143,7 +166,13 @@ int main() {
                                     colors[rand() % ARRAY_SIZE]};
             bracaletOrders.push_back(b_Order);
         }
-            
+
+        if (rand() % 2 == 0) {
+            IceCreamOrder i_Order = {names[rand() % ARRAY_SIZE], 
+                                    flavors[rand() % ARRAY_SIZE]};
+            iceCreamOrders.push_back(i_Order);
+        }
+
         cout << "\nRound " << round + 1 << ":";
         line.display();
 
@@ -161,7 +190,18 @@ int main() {
             cout << "   Bracalet queue is empty!" << endl;
         } else {
             for (const auto& customer : bracaletOrders) {
-                cout << "\n   Bracalet Customer: " << customer.name << ", Color: " << customer.bracalet;
+                cout << "\n   Bracalet Customer: " << customer.name << ", Color: " 
+                        << customer.bracalet;
+            }
+            cout << endl;
+        }
+
+        if (iceCreamOrders.empty()) {
+            cout << "   Ice Cream queue is empty!" << endl;
+        } else {
+            for (const auto& customer : iceCreamOrders) {
+                cout << "\n   Ice Cream Customer: " << customer.name << ", Flavor: " 
+                        << customer.flavor;
             }
             cout << endl;
         }

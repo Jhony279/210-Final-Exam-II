@@ -44,8 +44,30 @@ public:
 
         delete temp;
     }
+
+    void display() {
+        Customer* temp = front;
+        while(temp) {
+            cout << "Customer: " << temp->name << ", Order: " << temp->order << endl;
+            temp = temp->next;
+        }
+    }
+
+    ~CoffeQueue() {
+        while(front) {
+            Customer* temp = front;
+            front = front->next;
+            delete temp;
+        }
+    }
 };
 
 int main() {
+
+    const int ARRAY_SIZE = 10;
+    string names[ARRAY_SIZE] = {"Alice", "Bob", "Charlie", "Diana", "Ethan", 
+                                "Fiona", "George", "Hannah", "Ian", "Julia"};
+    string drinks[ARRAY_SIZE] = {"Latte", "Espresso", "Cappuccino", "Americano", "Mocha", 
+                                "Macchiato", "Cold Brew", "Matcha", "Chai Tea", "Frappuccino"};
     return 0;
 }

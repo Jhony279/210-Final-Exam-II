@@ -72,4 +72,10 @@ int main() {
     string drinks[ARRAY_SIZE] = {"Latte", "Espresso", "Cappuccino", "Americano", "Mocha", 
                                 "Macchiato", "Cold Brew", "Matcha", "Chai Tea", "Frappuccino"};
     return 0;
+
+    CoffeQueue queue;
+    for (int i = 0; i < 3; i++){
+        queue.enqueue(names[rand() % ARRAY_SIZE], drinks[rand() % ARRAY_SIZE]);
+    }
+    queue.display();
 }

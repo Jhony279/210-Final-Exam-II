@@ -34,7 +34,7 @@ public:
 
     void dequeue() {
         if(!front) {
-            cout << "   Coffee Queue is empty!" << endl;
+            cout << "\n   Coffee Queue is empty!" << endl;
             return;
         }
 
@@ -135,6 +135,7 @@ int main() {
         cout << "\n   Ice Cream Customer: " << order.name << ", Flavor: " 
                 << order.flavor;
     }
+    cout << endl;
 
     for (int round = 0; round <= 10; round++){
         line.dequeue();
@@ -177,7 +178,7 @@ int main() {
         line.display();
 
         if (muffinOrders.empty()) {
-            cout << "   Muffin queue is empty!" << endl;
+            cout << "\n   Muffin queue is empty!" << endl;
         } else {
             for (const auto& customer : muffinOrders) {
                 cout << "\n   Muffin Customer: " << customer.name << ", Order: " 
@@ -187,7 +188,7 @@ int main() {
         }
 
         if (bracaletOrders.empty()) {
-            cout << "   Bracalet queue is empty!" << endl;
+            cout << "\n   Bracalet queue is empty!" << endl;
         } else {
             for (const auto& customer : bracaletOrders) {
                 cout << "\n   Bracalet Customer: " << customer.name << ", Color: " 
@@ -197,7 +198,7 @@ int main() {
         }
 
         if (iceCreamOrders.empty()) {
-            cout << "   Ice Cream queue is empty!" << endl;
+            cout << "\n   Ice Cream queue is empty!" << endl;
         } else {
             for (const auto& customer : iceCreamOrders) {
                 cout << "\n   Ice Cream Customer: " << customer.name << ", Flavor: " 
